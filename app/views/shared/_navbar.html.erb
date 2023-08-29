@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class:"nav-link active", aria_current: "pages" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "About Us", about_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">News</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav text-white d-flex ms-auto mx-3">
+<!--          <li class="nav-item ms-2 mt-auto">-->
+            <%#= link_to "Log Out", class: "nav-link border border-light border-3 rounded", data: { turbo_method: :delete } %>
+<!--          </li>-->
+
+        <li class="nav-item ms-2 mt-auto">
+          <%= link_to "Sign Up", class: "nav-link border border-light border-3 rounded" %>
+        </li>
+        <li class="nav-item ms-2 mt-auto">
+          <%= link_to "Log In", class: "nav-link border border-light border-3 rounded" %>
+        </li>
+      </ul>
+
+
+    </div>
+  </div>
+</nav>

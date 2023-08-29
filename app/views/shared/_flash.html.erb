@@ -1,0 +1,19 @@
+<-! Create a notification ->
+<% if flash[:notice] %>
+  <div class="container">
+    <div class="alert alert-info mt-4 text-center alert-dismissible fade show" role="alert">
+      <%= flash[:notice] %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<% end %>
+
+<-! Create an Alert Message ->
+<%if flash[:alert] %>
+ <div class="container">
+   <div class="alert alert-info mt-4 text-center alert-dismissible fade show" role="alert">
+     <% flash[:alert] %>
+     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div>
+ </div>
+<%end %>
