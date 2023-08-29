@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   root   "pages#index"
   get 'about',  to:"pages#about"
+
+  resources :contents, only:[:index, :show]
 end
