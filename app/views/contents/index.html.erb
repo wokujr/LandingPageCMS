@@ -12,7 +12,7 @@
               <a href="#" class="text-dark text-decoration-none"><h3><%= content.title %></h3></a>
               <p class ="mb-4"> <%= content.body %> </p>
               <div class="mt-4 ">
-                <button type="button" class="btn btn-primary mx-2">Show</button>
+                <%= link_to "Show", content_path(content), class: "btn btn-primary mx-2" %>
                 <button type="button" class="btn btn-danger mx-2">Delete</button>
                 <button type="button" class="btn btn-warning mx-2">Edit</button>
               </div>
