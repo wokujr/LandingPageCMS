@@ -2,6 +2,7 @@
   <h1 class="text-center mt-4"> Create New News </h1>
 
   <%= form_with scope:  :contents,  url: contents_path, local: true  do |form|%>
+    <%= render 'shared/error_fllash', form: form %>
     <div>
       <%= form.label :title, class:"form-label" %><br>
       <%= form.text_field :title, class:"form-control" %>
