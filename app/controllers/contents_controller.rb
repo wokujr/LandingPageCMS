@@ -11,7 +11,26 @@ class ContentsController < ApplicationController
   end
 
   def show
-    @contents = Content.find(params[:id])
+    @content = Content.find(params[:id])
   end
+
+  def new
+
+  end
+  def create
+    @content = Content.new(content_params)
+    if @content.save
+      redirect_to @content, notice: 'Content was successfully'
+    else
+      render :new , status: :unprocessable_entity
+    end
+  end
+
+  private
+  def content_params
+    params.require(:contents).permit(:title, :body)
+
+  end
+
 
 end

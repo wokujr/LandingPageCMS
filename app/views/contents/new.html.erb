@@ -1,0 +1,19 @@
+<div class="container">
+  <h1 class="text-center mt-4"> Create New News </h1>
+
+  <%= form_with scope:  :contents,  url: contents_path, local: true  do |form|%>
+    <div>
+      <%= form.label :title, class:"form-label" %><br>
+      <%= form.text_field :title, class:"form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :body, class:"form-label" %> <br>
+      <%= form.text_area :body, class:"form-control mb-3" %>
+    </div>
+
+      <%= form.submit "Save News", class: "btn btn-primary" %>
+
+  <%end %>
+
+</div>
