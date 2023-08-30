@@ -1,7 +1,7 @@
-<% if form.object.errors.any? %>
+<% if object.errors.any? %>
   <div class="container">
     <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
-      <% form.object.errors.full_messages.each do |message| %>
+      <% object.errors.full_messages.each do |message| %>
         <div><%= message %> </div>
       <% end %>
       <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>

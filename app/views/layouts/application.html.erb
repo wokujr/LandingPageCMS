@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
   <head>
     <title>SimpleLandingPage</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= favicon_link_tag asset_path('coffee.png') %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "bodyCustom", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
   </head>
 
-  <%= render partial: "shared/navbar" %>
-  <%= render partial: "shared/flash" %>
-
   <body>
-    <%= yield %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+          <%= render partial: "shared/navbar" %>
+        </div>
+        <div class="col">
+          <%= render partial: "shared/flash" %>
+          <%= yield %>
+        </div>
+    </div>
+  </div>
+
+
+
   </body>
 </html>

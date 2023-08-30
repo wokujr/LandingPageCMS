@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="text-center mt-4"> Create New News </h1>
+  <h1 class="text-center mt-4"> Edit News </h1>
 
   <% if @content.errors.any? %>
     <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
@@ -11,7 +11,7 @@
   <% end %>
 
 
-  <%= form_with scope: :contents, url: contents_path, local: true do |form| %>
+  <%= form_with(model: @content, local: true)  do |form| %>
     <div>
       <%= form.label :title, class: "form-label" %><br>
       <%= form.text_field :title, class: "form-control" %>
@@ -22,7 +22,7 @@
       <%= form.text_area :body, class: "form-control mb-3" %>
     </div>
 
-    <%= form.submit "Save News", class: "btn btn-primary" %>
+    <%= form.submit "Edit Post", class: "btn btn-primary" %>
 
   <% end %>
 

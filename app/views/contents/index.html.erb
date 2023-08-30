@@ -1,43 +1,24 @@
 <div class="container">
-
-  <h1 class="text-center mb-4 mt-3"> News </h1>
   <div id="contents-container"> </div>
   <div class="">
-
     <section>
-      <div class="row gx-lg-5">
+      <div class="gx-lg-5 flex-nowrap ">
       <% @contents.each do |content| %>
-          <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 mt-4">
-            <div>
-              <a href="#" class="text-dark text-decoration-none"><h3><%= content.title %></h3></a>
-              <p class ="mb-4"> <%= content.body %> </p>
-              <div class="mt-4 ">
-                <%= link_to "Show", content_path(content), class: "btn btn-primary mx-2" %>
-                <button type="button" class="btn btn-danger mx-2">Delete</button>
-                <button type="button" class="btn btn-warning mx-2">Edit</button>
-              </div>
-            </div>
-          </div>
-
+          <ul class="list-group list-group-light px-4 mt-1">
+            <li class="list-group-item border border-dark">
+              <h3 class="mb-2"><%= content.title %></h3>
+              <%= link_to "Show", content_path(content), class: "btn btn-primary" %>
+              <%= link_to "Edit", edit_content_path(content), class: "btn btn-warning" %>
+              <%= link_to "Delete",content_path(content), class: "btn btn-danger",method: :delete, data:{turbo_method: :delete, turbo_confirm:"are you sure?"}%>
+            </li>
+          </ul>
       <% end %>
   </div>
     </section>
 
   </div>
-
-
 </div>
 
 
 <!--for json view-->
 <%#= javascript_include_tag 'content.js', 'data-turbo-track': 'reload', defer:true %>
-
-
-<!--if needed image feature-->
-<!--<div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4"-->
-<!--     data-mdb-ripple-color="light">-->
-<!--  <img src="https://mdbcdn.b-cdn.net/img/new/fluid/city/113.webp" class="img-fluid" />-->
-<!--  <a href="#!">-->
-<!--    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>-->
-<!--  </a>-->
-<!--</div>-->
