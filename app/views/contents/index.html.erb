@@ -1,27 +1,43 @@
 <div class="container">
 
-  <h1> Contents </h1>
+  <h1 class="text-center mb-4 mt-3"> News </h1>
   <div id="contents-container"> </div>
+  <div class="">
+
+    <section>
+      <div class="row gx-lg-5">
+      <% @contents.each do |content| %>
+          <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+            <div>
+              <a href="#" class="text-dark text-decoration-none"><h3><%= content.title %></h3></a>
+              <p class ="mb-4"> <%= content.body %> </p>
+              <div class="mt-4 ">
+                <button type="button" class="btn btn-primary mx-2">Show</button>
+                <button type="button" class="btn btn-danger mx-2">Delete</button>
+                <button type="button" class="btn btn-warning mx-2">Edit</button>
+              </div>
+            </div>
+          </div>
+
+      <% end %>
+  </div>
+    </section>
+
+  </div>
+
 
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let contentsContainer = document.getElementById("contents-container");
 
-        // Make AJAX request to fetch JSON data
-        let request = new XMLHttpRequest();
-        request.open("GET", "/contents.json", true);
-        request.onreadystatechange = function() {
-            if (request.readyState === 4 && request.status === 200) {
-                let contents = JSON.parse(request.responseText);
-
-                // Render JSON content on the page
-                contentsContainer.innerText = JSON.stringify(contents);
-            }
-        };
-        request.send();
-    });
-</script>
-
+<!--for json view-->
 <%#= javascript_include_tag 'content.js', 'data-turbo-track': 'reload', defer:true %>
+
+
+<!--if needed image feature-->
+<!--<div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4"-->
+<!--     data-mdb-ripple-color="light">-->
+<!--  <img src="https://mdbcdn.b-cdn.net/img/new/fluid/city/113.webp" class="img-fluid" />-->
+<!--  <a href="#!">-->
+<!--    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>-->
+<!--  </a>-->
+<!--</div>-->

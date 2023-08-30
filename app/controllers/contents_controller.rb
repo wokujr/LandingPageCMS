@@ -7,6 +7,11 @@ class ContentsController < ApplicationController
       format.html
       format.json { render json: @contents }
     end
+
+  end
+
+  def show
+    @contents = Content.find(params[:id])
   end
 
 end

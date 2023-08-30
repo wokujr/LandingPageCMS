@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   root   "pages#index"
   get 'about',  to:"pages#about"
 
-  resources :contents, only:[:index, :show]
+  resources :contents, path: 'news', only:[:index, :show, :new, :create]
 end
