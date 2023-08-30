@@ -7,14 +7,14 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var contentsContainer = document.getElementById("contents-container");
+        let contentsContainer = document.getElementById("contents-container");
 
         // Make AJAX request to fetch JSON data
-        var request = new XMLHttpRequest();
+        let request = new XMLHttpRequest();
         request.open("GET", "/contents.json", true);
         request.onreadystatechange = function() {
             if (request.readyState === 4 && request.status === 200) {
-                var contents = JSON.parse(request.responseText);
+                let contents = JSON.parse(request.responseText);
 
                 // Render JSON content on the page
                 contentsContainer.innerText = JSON.stringify(contents);
