@@ -1,23 +1,33 @@
+<%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
+
 <div class="container">
-  <div id="contents-container"> </div>
   <div class="">
     <section>
-      <div class="gx-lg-5 flex-nowrap ">
-      <% @contents.each do |content| %>
-          <ul class="list-group list-group-light px-4 mt-1">
-            <li class="list-group-item border border-dark">
-              <h3 class="mb-2"><%= content.title %></h3>
-              <%= link_to "Show", content_path(content), class: "btn btn-primary" %>
-              <%= link_to "Edit", edit_content_path(content), class: "btn btn-warning" %>
-              <%= link_to "Delete",content_path(content), class: "btn btn-danger",method: :delete, data:{turbo_method: :delete, turbo_confirm:"are you sure?"}%>
-            </li>
-          </ul>
-      <% end %>
-  </div>
-    </section>
 
+      <% @contents.each do |content| %>
+        <div class="card text-center shadow bg-body-tertiary rounded mt-4 mb-5 ">
+          <div class="card-header">Created by Yamamoto</div>
+          <div class="card-body">
+            <h5 class="card-title"> <%=link_to content.title, content_path(content), class:"text-success text-decoration-none" %> </h5>
+            <p class="card-text"> <%= truncate(content.body, length: 100)  %> </p>
+            <%= link_to "Show", content_path(content), class: "btn btn-primary" %>
+            <%= link_to "Edit", edit_content_path(content), class: "btn btn-warning" %>
+            <%= link_to "Delete", content_path(content), class: "btn btn-danger", method: :delete, data: { turbo_method: :delete, turbo_confirm: "are you sure?" } %>
+          </div>
+          <div class="card-footer text-body-secondary">
+            <small>Create <%= time_ago_in_words(content.created_at)  %> ago, edited <%= time_ago_in_words(content.created_at) %> ago</small>
+          </div>
+        </div>
+
+      <% end %>
+    </section>
+  </div>
+
+  <div class="flickr_pagination">
+    <%= will_paginate @contents, :container => false %>
   </div>
 </div>
+
 
 
 <!--for json view-->

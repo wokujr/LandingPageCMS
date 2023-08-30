@@ -1,7 +1,7 @@
 class ContentsController < ApplicationController
 
   def index
-    @contents = Content.all
+    @contents = Content.paginate(page: params[:page], per_page: 3)
 
     respond_to do |format|
       format.html

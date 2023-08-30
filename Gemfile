@@ -79,5 +79,6 @@ gem "jsbundling-rails", "~> 1.1"
 gem 'jquery-rails', '~> 4.4'
 gem "devise", "~> 4.9"
 gem 'bootstrap', '~> 5.3.0'
+gem 'will_paginate', '~> 4.0'
 
 
