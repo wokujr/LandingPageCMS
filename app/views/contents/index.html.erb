@@ -1,27 +1,34 @@
+<%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
+
 <div class="container">
+  <div class="">
+    <section>
 
-  <h1> Contents </h1>
-  <div id="contents-container"> </div>
+      <% @contents.each do |content| %>
+        <div class="card text-center shadow bg-body-tertiary rounded mt-4 mb-5 ">
+          <div class="card-header">Created by Yamamoto</div>
+          <div class="card-body">
+            <h5 class="card-title"> <%=link_to content.title, content_path(content), class:"text-success text-decoration-none" %> </h5>
+            <p class="card-text"> <%= truncate(content.body, length: 100)  %> </p>
+            <%= link_to "Show", content_path(content), class: "btn btn-primary" %>
+            <%= link_to "Edit", edit_content_path(content), class: "btn btn-warning" %>
+            <%= link_to "Delete", content_path(content), class: "btn btn-danger", method: :delete, data: { turbo_method: :delete, turbo_confirm: "are you sure?" } %>
+          </div>
+          <div class="card-footer text-body-secondary">
+            <small>Create <%= time_ago_in_words(content.created_at)  %> ago, edited <%= time_ago_in_words(content.created_at) %> ago</small>
+          </div>
+        </div>
 
+      <% end %>
+    </section>
+  </div>
+
+  <div class="flickr_pagination">
+    <%= will_paginate @contents, :container => false %>
+  </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let contentsContainer = document.getElementById("contents-container");
 
-        // Make AJAX request to fetch JSON data
-        let request = new XMLHttpRequest();
-        request.open("GET", "/contents.json", true);
-        request.onreadystatechange = function() {
-            if (request.readyState === 4 && request.status === 200) {
-                let contents = JSON.parse(request.responseText);
 
-                // Render JSON content on the page
-                contentsContainer.innerText = JSON.stringify(contents);
-            }
-        };
-        request.send();
-    });
-</script>
-
+<!--for json view-->
 <%#= javascript_include_tag 'content.js', 'data-turbo-track': 'reload', defer:true %>

@@ -1,0 +1,20 @@
+.bg-custom{
+    background-color: transparent !important;
+}
+
+.navbar .container-fluid,
+.navbar-expand-lg .navbar-collapse,
+.navbar-expand-lg .navbar-nav{
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@media (min-width: 992px) {
+    .navbar{
+        width: 28%;
+        height: 100vh;
+    }
+    .form-inputs{
+        margin-bottom: 0.7rem;
+    }
+}

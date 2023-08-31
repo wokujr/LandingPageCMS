@@ -1,0 +1,22 @@
+<div class="container">
+
+  <div class="card text-center mt-4 shadow bg-body-tertiary rounded">
+    <div class="card-header">
+      Created by Yamamoto
+    </div>
+    <div class="card-body ">
+      <h5 class="card-title"> <%= @content.title %> </h5>
+      <p class="card-text"> <%= @content.body %> </p>
+
+      <%= link_to "Edit", edit_content_path(@content), class: "btn btn-warning" %>
+      <%= link_to "Delete",content_path(@content), class: "btn btn-danger",method: :delete, data:{turbo_method: :delete, turbo_confirm:"are you sure?"}%>
+
+    </div>
+    <div class="card-footer text-body-secondary">
+      <small>Create <%= time_ago_in_words(@content.created_at)  %> ago, edited <%= time_ago_in_words(@content.created_at) %> ago</small>
+    </div>
+  </div>
+
+  <%=link_to "Return to Post List", contents_path, class: "btn btn-success mt-4" %>
+
+</div>

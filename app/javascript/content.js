@@ -1,20 +1,16 @@
-function showContent() {
+document.addEventListener("DOMContentLoaded", function() {
+    let contentsContainer = document.getElementById("contents-container");
 
-    document.addEventListener('DOMContentLoaded', function() {
-        let contentContainer = document.getElementById("content")
+    // Make AJAX request to fetch JSON data
+    let request = new XMLHttpRequest();
+    request.open("GET", "news.json", true);
+    request.onreadystatechange = function() {
+        if (request.readyState === 4 && request.status === 200) {
+            let contents = JSON.parse(request.responseText);
 
-        // make AJAX request
-        let request = new XMLHttpRequest()
-        request.open('GET',"contents.json", true);
-        request.onreadystatechange = function() {
-            if (request.readyState === 4 && request.status === 200) {
-                let contents = JSON.parse(request.responseText);
-
-                //update id=content with JSON data
-                contentContainer.innerHTML = JSON.stringify(contents);
-            }
-        };
-        request.send();
-    });
-
-}
+            // Render JSON content on the page
+            contentsContainer.innerText = JSON.stringify(contents);
+        }
+    };
+    request.send();
+});

@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 class="text-center mt-4 mb-4"> Create New Post </h1>
+
+  <% if @content.errors.any? %>
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+      <% @content.errors.full_messages.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <div class="row d-flex justify-content-center mx-auto">
+    <div class="col-10">
+      <%= form_with scope: :contents, url: contents_path, class: "shadow p-3 mb-3 bg-info rounded ", local: true do |form| %>
+        <div class="input-group row  mt-4">
+          <%= form.label :title, class: "form-label col-2 col-form-label" %>
+          <div class="col-10 mb-4">
+            <%= form.text_field :title, class: "form-control" %>
+          </div>
+        </div>
+        <div class="input-group row">
+          <%= form.label :body, class: "form-label col-2 col-form-label" %>
+          <div class="col-10">
+            <%= form.text_area :body, class: "form-control mb-3", rows: 5 %>
+          </div>
+        </div>
+        <%= form.submit "Save News", class: "btn btn-outline-primary btn-lg  d-flex justify-content-center mx-auto mt-4" %>
+      <% end %>
+    </div>
+  </div>
+</div>
