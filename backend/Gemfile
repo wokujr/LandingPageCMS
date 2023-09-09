@@ -80,3 +80,5 @@ gem 'trix'
 
 gem "jsonapi-serializer", "~> 2.2"
 gem "carrierwave", "~> 3.0"
+
+gem "devise", "~> 4.9"
