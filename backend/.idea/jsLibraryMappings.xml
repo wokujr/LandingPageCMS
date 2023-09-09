@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <excludedPredefinedLibrary name="NextRails/cms/node_modules" />
+    <excludedPredefinedLibrary name="NextRails/frontend/node_modules" />
+  </component>
+</project>

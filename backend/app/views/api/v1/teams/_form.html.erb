@@ -1,0 +1,35 @@
+<%= form_with(model: team, url: api_teams_path) do |form| %>
+  <% if team.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+      <ul>
+        <% team.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.label :position, style: "display: block" %>
+    <%= form.text_field :position %>
+  </div>
+  
+
+  <div class="mt-4">
+    <%= form.label :picture, class:"control-label" %>
+    <div class="controls">
+      <%=form.file_field :picture, accept: 'image/jpeg,image/jpg,image/png' %>
+    </div>
+
+  </div>
+
+  <div>
+    <%= form.submit class: "btn btn-primary mt-4" %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<div class="container">
+
+<%= form_with scope: @posts, url: api_v1_posts_path do |form| %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body, style: "display: block" %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+  <% end %>
+    <div>
+      <%#= link_to "Back to posts", api_v1_posts_path %>
+    </div>
+</div>
