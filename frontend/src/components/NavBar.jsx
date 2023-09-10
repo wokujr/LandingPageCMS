@@ -15,7 +15,11 @@ function NavBar() {
                     <MenuItem> Contact </MenuItem>
                     <MenuItem> SocialMedia</MenuItem>
                 </SubMenu>
-                <MenuItem component={<Link to={"/login"} /> }> Login </MenuItem>
+                <SubMenu label="User">
+                    <MenuItem component={<Link to={"/login"} /> }> Log In </MenuItem>
+                    <MenuItem component={<Link to={"/login"} /> }> Log Out </MenuItem>
+                    <MenuItem component={<Link to={"/login"} /> }> Sign Up</MenuItem>
+                </SubMenu>
             </Menu>
         </Sidebar>
     )

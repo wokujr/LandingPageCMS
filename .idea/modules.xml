@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Keihin.iml" filepath="$PROJECT_DIR$/.idea/Keihin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend.iml" filepath="$PROJECT_DIR$/.idea/modules/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/doorkeeper.iml" filepath="$PROJECT_DIR$/.idea/modules/doorkeeper.iml" />
     </modules>
   </component>
 </project>

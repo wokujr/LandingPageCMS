@@ -4,6 +4,17 @@ module Api
       before_action :set_company, only: %i[ show edit update destroy ]
       skip_before_action :verify_authenticity_token
 
+
+      def home
+        @door = Doorkeeper::Application.find_by(id: SUM)
+
+        @door = {
+          name: @door.name,
+          client_id: @door.uid,
+          client_secret: @door.secret
+          }
+      end
+
       # GET /companies or /companies.json
       def index
         @companies = Company.order(created_at: :desc)
