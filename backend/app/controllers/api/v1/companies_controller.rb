@@ -2,17 +2,15 @@ module Api
   module V1
     class CompaniesController < ApplicationController
       before_action :set_company, only: %i[ show edit update destroy ]
-      skip_before_action :verify_authenticity_token
+      skip_before_action :verify_authenticity_token, raise: false
 
-
-      def home
-        @door = Doorkeeper::Application.find_by(id: SUM)
-
-        @door = {
-          name: @door.name,
-          client_id: @door.uid,
-          client_secret: @door.secret
-          }
+      def restricted
+        devise_api_token = current_devise_api_token
+        if devise_api_token
+          render json: {message: "youre Logged in as #{devise_api_token.resource_owner.email}"}, status: :ok
+        else
+          render json: {message: "you are not logged in"}, status:  :unauthorized
+        end
       end
 
       # GET /companies or /companies.json
@@ -26,6 +24,7 @@ module Api
         set_company
         render json: company_json(@company)
       end
+
       def edit
         set_company
         render json: company_json(@company)

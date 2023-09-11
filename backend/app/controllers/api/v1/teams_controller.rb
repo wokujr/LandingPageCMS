@@ -1,5 +1,6 @@
 class Api::V1::TeamsController < ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token, raise: false
 
   # GET /teams or /teams.json
   def index
@@ -9,6 +10,8 @@ class Api::V1::TeamsController < ApplicationController
 
   # GET /teams/1 or /teams/1.json
   def show
+    set_team
+    render json: @team
   end
 
   # GET /teams/new
@@ -16,20 +19,13 @@ class Api::V1::TeamsController < ApplicationController
     @team = Team.new
   end
 
-  # GET /teams/1/edit
-  def edit
-  end
-
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
-
     respond_to do |format|
       if @team.save
-        format.html { redirect_to api_v1_team_url(@team), notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
       else
-        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -37,23 +33,24 @@ class Api::V1::TeamsController < ApplicationController
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
+    @team = Team.find(params[:id])
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to api_v1_team_url(@team), notice: "Team was successfully updated." }
-        format.json { render :show, status: :ok, location: @team }
+        if params[:team][:image].present?
+          @team.save
+        end
+        format.json { render :show, status: :ok, location: api_v1_teams_url(@team) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.json { render json: api_v1_teams_url(@team).errors, status: :unprocessable_entity }
       end
     end
   end
 
+
   # DELETE /teams/1 or /teams/1.json
   def destroy
     @team.destroy
-
     respond_to do |format|
-      format.html { redirect_to api_v1_teams_url, notice: "Team was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,6 +63,6 @@ class Api::V1::TeamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def team_params
-      params.require(:team).permit(:name, :position, :pictures)
+      params.require(:team).permit(:name, :title, :image)
     end
 end
