@@ -1,6 +1,9 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import ReactPlayer from 'react-player';
+import axios from "axios";
+
+const API_URL= 'http://localhost:3000/api/v1'
 
 export default function EditProfile(){
 
@@ -15,7 +18,8 @@ export default function EditProfile(){
         //need to fetch the ID ><
         const fetchCurrentProfile = async ()=>{
             try {
-                const response = await fetch(`http://localhost:3000/api/v1/teams/${id}`);
+                const response = await fetch(`${API_URL}/teams/${id}`);
+
                 if (response.ok){
                     const json = await response.json();
                     setEdit(json);
@@ -34,13 +38,24 @@ export default function EditProfile(){
     // Update Video And image
     const updateImage = async () => {
         if (!newImage) return;
-
         const formData = new FormData();
         formData.append('team[image]', newImage);
-        await fetch(`http://localhost:3000/api/v1/teams/${id}`,{
-            method:"PUT",
-            body: formData
-        })
+        try{
+            const response = await axios.put(`${API_URL}/teams/${id}`, formData, {
+                headers: {
+                    'Content-Type' : 'multipart/form-data'
+                }
+            })
+        }catch (error){
+            console.log('An Error Occurred', error)
+        }
+
+        // const formData = new FormData();
+        // formData.append('team[image]', newImage);
+        // await fetch(`${API_URL}/teams/${id}`,{
+        //     method:"PUT",
+        //     body: formData
+        // })
     };
 
     // Function to handle form submission
@@ -56,22 +71,16 @@ export default function EditProfile(){
         if (newImage) {
             formData.append("team[image]", newImage);
         }
-
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/teams/${id}`, {
-                method: "PUT",
-                body: formData,
+            const response = await axios.put(`${API_URL}/teams/${id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
-
-            if (response.ok) {
-                // Handle success, e.g., redirect to the team's profile page
-                navigate(`/team/${id}`);
-            } else {
-                throw response;
-            }
         } catch (error) {
             console.error("Error updating team:", error);
         }
+        navigate(`/teams`);
     };
 
     if (!edit) return <h2>Loading...</h2>
