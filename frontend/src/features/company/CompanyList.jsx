@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate, useParams} from "react-router-dom";
 
+const API_URL = 'http://localhost:3000/api/v1'
+
 export default function CompanyList() {
     const [companies, setCompanies] = useState([]);
     const [, setLoading] = useState(true);
@@ -11,7 +13,7 @@ export default function CompanyList() {
     useEffect(() => {
         async function loadAbout() {
             try {
-                const response = await fetch('http://localhost:3000/api/v1/companies');
+                const response = await fetch(`${API_URL}/companies`);
                 if (response.ok) {
                     const json = await response.json();
                     setCompanies(json);
@@ -40,7 +42,7 @@ export default function CompanyList() {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/companies/${id}`, {
+            const response = await fetch(`${API_URL}/companies/${id}`, {
                 method: "DELETE",
             });
             if (response.ok) {

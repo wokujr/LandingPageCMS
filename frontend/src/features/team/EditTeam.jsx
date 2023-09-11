@@ -49,13 +49,6 @@ export default function EditProfile(){
         }catch (error){
             console.log('An Error Occurred', error)
         }
-
-        // const formData = new FormData();
-        // formData.append('team[image]', newImage);
-        // await fetch(`${API_URL}/teams/${id}`,{
-        //     method:"PUT",
-        //     body: formData
-        // })
     };
 
     // Function to handle form submission

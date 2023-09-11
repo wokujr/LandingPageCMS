@@ -1,6 +1,9 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import ReactPlayer from 'react-player';
+import axios from "axios";
+
+const API_URL = 'http://localhost:3000/api/v1'
 
 export default function EditProfile(){
 
@@ -18,7 +21,7 @@ export default function EditProfile(){
         //need to fetch the ID ><
         const fetchCurrentProfile = async ()=>{
             try {
-                const response = await fetch(`http://localhost:3000/api/v1/companies/${id}`);
+                const response = await fetch(`${API_URL}/companies/${id}`);
                 if (response.ok){
                     const json = await response.json();
                     setEdit(json);
@@ -43,78 +46,76 @@ export default function EditProfile(){
         );
     }
 
-    const handleEditSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch(`http://localhost:3000/api/v1/companies/${id}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type" : "application/json",
-                    },
-                    body: JSON.stringify(edit),
-                });
-            if (response.ok){
-                const json = await response.json()
-                console.log("uuh JSON?", json);
-                navigate(`/company/${id}`)
-            }else{
-                throw response;
-            }
-        }catch (e) {
-            console.log("An error occurred Awkward", e);
-        }
-    };
 
     // Update Video And image
     const updateImage = async () => {
         if (!newImage) return;
 
         const formData = new FormData();
-        formData.append('image', newImage);
-
-        try {
-            const response = await fetch(`/api/v1/companies/${id}/upload_image`, {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok) {
-                // ImageForTeam updated successfully, you can update the state or display a success message
-                console.log('ImageForTeam updated successfully');
-            } else {
-                // Handle error here
-                console.error('ImageForTeam update failed');
+        formData.append('company[image]', newImage);
+        try{
+            const response = await axios.put(`${API_URL}/companies/${id}`, formData, {
+                headers: {
+                    'Content-Type' : 'multipart/form-data'
+                }
+            })
+            if (response.status === 200){
+                console.log("Image updated")
+                window.location.reload();
             }
-        } catch (error) {
-            console.error('An error occurred while updating the image:', error);
+            else {
+                console.log("Image upload Error occured")
+            }
+        }catch (error){
+            console.log('An Error Occurred', error)
         }
     };
 
     const updateVideo = async () => {
-        if (!newVideo) return;
-
+        if (!newImage) return;
         const formData = new FormData();
-        formData.append('video', newVideo);
-
-        try {
-            const response = await fetch(`/api/v1/companies/${id}/upload_video`, {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok) {
-                // Video updated successfully, you can update the state or display a success message
-                console.log('Video updated successfully');
-            } else {
-                // Handle error here
-                console.error('Video update failed');
+        formData.append('company[video]', newVideo);
+        try{
+            const response = await axios.put(`${API_URL}/companies/${id}`, formData, {
+                headers: {
+                    'Content-Type' : 'multipart/form-data'
+                }
+            })
+            if (response.status === 200){
+                console.log("Video Updated")
             }
-        } catch (error) {
-            console.error('An error occurred while updating the video:', error);
+            else {
+                console.log("Video upload Error occurred")
+            }
+        }catch (error){
+            console.log('An Error Occurred', error)
         }
     };
-    // End of upload new video and image
+
+    const handleEditSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('company[title]',edit.title)
+        formData.append('company[body]', edit.body)
+
+        //if image
+        if (newImage) {
+            formData.append('company[image]', newImage);
+        }
+        // if video
+        if (newVideo){
+            formData.append('company[video]', newVideo);
+        }
+        try{
+            const response = await axios.put(`${API_URL}/companies/${id}`, formData, {
+                headers:{
+                    "Content-Type": "multipart/form-data",
+                }
+            })
+        }catch (error){
+            console.log("An error occurred", error);
+        }
+    };
 
     if (!edit) return <h2>Loading...</h2>
 
@@ -146,6 +147,7 @@ export default function EditProfile(){
                             />
                             <br/>
                             <input className="mb-5" type="file" accept="image/*" onChange={(e) => setNewImage(e.target.files[0])}/>
+                            <button onClick={updateImage}>Update Image</button>
                         </div>
                     </div>
                     <div className="col">
@@ -153,17 +155,12 @@ export default function EditProfile(){
                             <VideoPlayer width="320" height="240" videoUrl={edit.video_url}/>
                             <br/>
                             <input type="file" accept="video/*" onChange={(e) => setNewVideo(e.target.files[0])}/>
+                            <button onClick={updateVideo}>Update Video</button>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <button onClick={updateImage}>Update Image</button>
-                    <button onClick={updateVideo}>Update Video</button>
                 </div>
                 <button className="btn btn-primary">Save</button>
             </form>
         </div>
-
     )
-
 }
