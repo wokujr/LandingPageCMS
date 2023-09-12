@@ -55,18 +55,6 @@ class Api::V1:: CompaniesController < ApplicationController
     render json: CompanySerializer.new(@company).serializable_hash[:data][:attributes]
   end
 
-  def upload_image
-    set_company
-    @company.image.purge if @company.image.attached? # Remove previous image
-    @company.image.attach(params[:image]) # Attach the new image
-  end
-
-  def upload_video
-    set_company
-    @company.video.purge if @company.video.attached? # Remove previous video
-    @company.video.attach(params[:video]) # Attach the new video
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.

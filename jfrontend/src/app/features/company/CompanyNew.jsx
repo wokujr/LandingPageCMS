@@ -32,9 +32,10 @@ export default function CompanyNew() {
         navigate('/')
 
     };
+
+    // Image related
     const handleImageChange = (event) => {
-        const selectedImage = event.target.files[0];
-        setImage(selectedImage);
+        setImage(URL.createObjectURL(event.target.files[0]));
     };
 
     const handleVideoChange = (event) => {
@@ -42,11 +43,6 @@ export default function CompanyNew() {
         setVideo(selectedVideo);
     };
 
-    // Render HTML safetly? idk
-    // const renderHTML = (html) => {
-    //     const sanitizedHTML = DOMPurify.sanitize(html);
-    //     return { __html: sanitizedHTML };
-    // };
 
     return(
         <div className="container mt-5 ">
@@ -86,9 +82,11 @@ export default function CompanyNew() {
                         accept="image/jpeg/ image/jpg image/png" // Add this to restrict to image files
                         onChange={handleImageChange}
                     />
+                    <img className="w-25" src={image} alt={title}/>
                 </div>
-                <br />
 
+
+                <br />
                 <div>
                     <label htmlFor="titleInput">Video:</label>
                     <input
@@ -96,7 +94,7 @@ export default function CompanyNew() {
                         type="file"
                         name="video"
                         id="video"
-                        accept="video/*" // Add this to restrict to image files
+                        accept="video/mp4" // Add this to restrict to image files
                         onChange={handleVideoChange}
                     />
                 </div>
@@ -111,96 +109,4 @@ export default function CompanyNew() {
             </form>
         </div>
     )
-    // const navigate = useNavigate();
-    //
-    // const [editor, setEditor] = useState(null);
-    // const [title, setTitle] = useState('');
-    // const [body, setBody] = useState('');
-    // const [image, setImage] = useState(null);
-    // const [video, setVideo] = useState(null);
-    //
-    //
-    // useEffect(() => {
-    //     if (editorRef.current) {
-    //         const editor = new EditorJS({
-    //             holder: editorRef.current,
-    //             tools: {
-    //                 header: {
-    //                     class: Header,
-    //                 },
-    //                 list: {
-    //                     class: List,
-    //                 },
-    //                 paragraph: {
-    //                     class: Paragraph,
-    //                     config: {
-    //                         inlineToolbar: true,
-    //                     },
-    //                 },
-    //                 code: CodeTool,
-    //             },
-    //         });
-    //     }
-    // }, []);
-    //
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const form = new FormData();
-    //     form.append('company[title]', title);
-    //     form.append('company[body]', body);
-    //
-    //     if (image) {
-    //         form.append('company[image]', image);
-    //     }
-    //     if (video) {
-    //         form.append('company[video]', video);
-    //     }
-    //
-    //     await fetch('http://localhost:3000/api/v1/companies', {
-    //         method: 'POST',
-    //         body: form,
-    //     });
-    //     // Redirect or perform other actions as needed
-    //     navigate('/company')
-    //
-    // };
-    // const handleImageChange = (event) => {
-    //     const selectedImage = event.target.files[0];
-    //     setImage(selectedImage);
-    // };
-    //
-    // return (
-    //     <div className="container mt-5 ">
-    //         <form onSubmit={handleSubmit}>
-    //             <div className="mt-4">
-    //                 <label htmlFor="titleInput">Title:</label>
-    //                 <input
-    //                     className="form-control mb-4 text-center"
-    //                     style={{ width: '40rem' }}
-    //                     id="titleInput"
-    //                     type="text"
-    //                     value={title}
-    //                     onChange={(e) => setTitle(e.target.value)}
-    //                     required
-    //                 />
-    //             </div>
-    //             {/*<input*/}
-    //             {/*    className="mb-2"*/}
-    //             {/*    type="file"*/}
-    //             {/*    name="image"*/}
-    //             {/*    id="image"*/}
-    //             {/*    accept="image/*" // Add this to restrict to image files*/}
-    //             {/*    onChange={handleImageChange}*/}
-    //             {/*/>*/}
-    //             <br />
-    //
-    //
-    //             <div>
-    //                 <button className="btn btn-primary mt-3" type="submit">
-    //                     Create Post
-    //                 </button>
-    //             </div>
-    //         </form>
-    //     </div>
-    // );
 }

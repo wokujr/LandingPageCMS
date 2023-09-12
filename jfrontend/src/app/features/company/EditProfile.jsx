@@ -62,7 +62,6 @@ export default function EditProfile(){
             })
             if (response.status === 200){
                 console.log("Image updated")
-                window.location.reload();
             }
             else {
                 console.log("Image upload Error occured")
@@ -72,7 +71,8 @@ export default function EditProfile(){
         }
     };
 
-    const updateVideo = async () => {
+    const updateVideo = async (e) => {
+        e.preventDefault();
         if (!newImage) return;
         const formData = new FormData();
         formData.append('company[video]', newVideo);
@@ -96,8 +96,8 @@ export default function EditProfile(){
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('company[title]',edit.title)
-        formData.append('company[body]', edit.body)
+        formData.append('company[title]', edit.title);
+        formData.append('company[body]', edit.body);
 
         //if image
         if (newImage) {
@@ -107,15 +107,22 @@ export default function EditProfile(){
         if (newVideo){
             formData.append('company[video]', newVideo);
         }
-        // try{
-        //     const response = await axios.put(`${API_URL}/companies/${id}`, formData, {
-        //         headers:{
-        //             "Content-Type": "multipart/form-data",
-        //         }
-        //     })
-        // }catch (error){
-        //     console.log("An error occurred", error);
-        // }
+
+        try {
+            const response = await axios.put(`${API_URL}/companies/${id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            });
+
+            if (response.status === 200) {
+                console.log("Data Updated");
+            } else {
+                console.log("Data Update Error occurred");
+            }
+        } catch (error) {
+            console.log("An error occurred", error);
+        }
     };
 
     if (!edit) return <h2>Loading...</h2>

@@ -6,8 +6,11 @@ const UPDATE_PROFILE_URL = "/users"
 const LOGOUT_URL = "/oauth/revoke"
 const CURRENT_USER_URL = "/users/me"
 
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
-const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET
+// eslint-disable-next-line no-undef
+console.log(process.env)
+
+const CLIENT_ID = "hMXaVRQSm_KrwwONhy07oM3CjPEhJotoOOTjqOX5gBs"
+const CLIENT_SECRET = "WIp7Y6mhUAGq7RhSsn7Ua4Bvotx5iAQ3c3ux4zDBqqY"
 
 export async function createUserWithEmailAndPassword(email, password) {
     const data = {

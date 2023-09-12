@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 const API_URL = 'http://localhost:3000/api/v1'
 
 export default function CompanyList() {
@@ -53,29 +57,48 @@ export default function CompanyList() {
         } catch (e) {
             console.log("Well, that can't be deleted.", e);
         }
+
         navigate('/company');
     };
-
     return (
         <div>
             <h1>Company List</h1>
             {companies.map((company) => (
-                <div key={company.id} className="container">
-                    <div className="card mt-4 border-black border-4">
-                        <div  className="">
-                            <div>
-                                <h2>{company.title}</h2>
-                            </div>
-                            <div>
-                                <p>{company.body}</p>
-                            </div>
-                            <div>
-                                <button onClick={() => {handleDelete(company.id)}} className="btn btn-danger mx-2 mt-2 mb-2">Delete</button>
-                                <button onClick={() => {handleEdit(company.id)}} className="btn btn-warning mx-2 mt-2 mb-2">Edit</button>
-                                <button onClick={() => {handleShowDetail(company.id)}} className="btn btn-success">Show Detail</button>
-                            </div>
-                        </div>
-                    </div>
+                <div key={company.id} className="">
+                    <table className="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th className="mx-2" scope="col">Title</th>
+                            <th className="mx-2" scope="col">Content</th>
+                            <th className="mx-2" scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{company.title}</td>
+                            <td>{company.body}</td>
+                            <td>
+                                <div>
+                                    <button onClick={() => {
+                                        handleDelete(company.id)
+                                    }} className="btn">
+                                        <DeleteIcon />
+                                    </button>
+                                    <button onClick={() => {
+                                        handleEdit(company.id)
+                                    }} className="btn">
+                                        <EditIcon />
+                                    </button>
+                                    <button onClick={() => {
+                                        handleShowDetail(company.id)
+                                    }} className="btn">
+                                        <VisibilityIcon/>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             ))}
         </div>

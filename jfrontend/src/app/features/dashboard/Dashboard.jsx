@@ -8,19 +8,42 @@ function Dashboard() {
     return (
         <section>
             <h1>Dashboard</h1>
-            <ul>
-                <li>
-                    Current User
-                    <ul>
-                        <li>Id: {currentUser?.id}</li>
-                        <li>Email: {currentUser?.email}</li>
-                        <li>Role: {currentUser?.role}</li>
-                        <li>Created At: {currentUser?.createdAt}</li>
-                    </ul>
-                </li>
-                <li>Access Token: {accessToken}</li>
-                <li>Refresh Token: {refreshToken}</li>
-            </ul>
+
+
+            <table className="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Created At</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{currentUser?.id}</td>
+                    <td>{currentUser?.email}</td>
+                    <td>{currentUser?.role}</td>
+                    <td>{currentUser?.createdAt}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table className="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Access Token</th>
+                    <th scope="col">Refresh Token</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr>
+                    <td>:{accessToken}</td>
+                    <td>: {refreshToken}</td>
+                </tr>
+                </tbody>
+            </table>
         </section>
     )
 }

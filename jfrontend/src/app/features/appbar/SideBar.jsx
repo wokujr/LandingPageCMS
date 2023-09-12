@@ -14,7 +14,19 @@ import Dashboard from "../dashboard/Dashboard";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import {useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
+import PersistLogin from "../sessions/PersistLogin";
+import PrivateRoute from "../routes/PrivateRoute";
+import Logout from "../sessions/Logout";
+import UpdateProfile from "../sessions/UpdateProfile";
+import PublicOnlyRoute from "../routes/PublicOnlyRoute";
+import Login from "../sessions/Login";
+import Signup from "../sessions/Signup";
+import CompanyAbout from "../company/CompanyAbout";
+import CompanyList from "../company/CompanyList";
+import CompanyNew from "../company/CompanyNew";
+import CompanyDetail from "../company/CompanyDetail";
+import EditProfile from "../company/EditProfile";
 
 const drawerWidth = 240;
 
@@ -55,7 +67,26 @@ function ResponsiveDrawer(props) {
         navigate("/logout")
     }
 
-    //
+    //Company Functions
+    const handleCloseCompanyMenu = () =>{
+        setAnchorEl(null);
+    }
+    function handleCompanyProfile(e){
+        e?.preventDefault()
+        handleCloseCompanyMenu()
+        navigate("/company")
+    }
+    function handleNewCompany(e) {
+        e?.preventDefault()
+        handleCloseCompanyMenu()
+        navigate("/company/new")
+    }
+
+    function handleListProfile(e) {
+        e?.preventDefault();
+        handleCloseCompanyMenu();
+        navigate("/company/list")
+    }
 
     const drawer = (
         <div>
@@ -67,8 +98,21 @@ function ResponsiveDrawer(props) {
                 Company
             </Button>
             <Menu id="company" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{'aria-labelledby': 'company',}} >
-                <MenuItem onClick={handleClose}>Company Profile</MenuItem>
-                <MenuItem onClick={handleClose}>New Profile</MenuItem>
+                <MenuItem onClick={handleCompanyProfile}>Company Profile</MenuItem>
+                <MenuItem onClick={handleNewCompany}>New Profile</MenuItem>
+                <MenuItem onClick={handleListProfile}>List Profile</MenuItem>
+
+                <Divider style={{ background: 'black' }}/>
+                <MenuItem >Team List</MenuItem>
+                <MenuItem >New Team</MenuItem>
+
+                <Divider style={{ background: 'black' }}/>
+                <MenuItem >Galery</MenuItem>
+                <MenuItem >Contact</MenuItem>
+
+                <Divider style={{ background: 'black' }}/>
+                <MenuItem >Social Media</MenuItem>
+
             </Menu>
 
             <Divider />
@@ -78,11 +122,8 @@ function ResponsiveDrawer(props) {
                 User
             </Button>
             <Menu id="user" anchorEl={anchorElUser} open={openUser} onClose={handleCloseUser} MenuListProps={{'aria-labelledby': 'user',}}>
-                <MenuItem onClick={handleClose}>Login</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
-
-
         </div>
     );
 
@@ -109,11 +150,7 @@ function ResponsiveDrawer(props) {
             </AppBar>
             <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
+                <Drawer container={container} variant="temporary" open={mobileOpen} onClose={handleDrawerToggle}
                     ModalProps={{
                         keepMounted: true, // Better open performance on mobile.
                     }}
@@ -138,7 +175,70 @@ function ResponsiveDrawer(props) {
             <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}>
                 <Toolbar />
                 <Typography paragraph>
-                   <Dashboard />
+
+                    <Routes>
+                        <Route element={<PersistLogin />} >
+                            <Route path="/" element={
+                                <PrivateRoute>
+                                    <Dashboard />
+                                </PrivateRoute>
+                            }
+                            />
+                            <Route path="/logout" element={
+                                <PrivateRoute>
+                                    <Logout />
+                                </PrivateRoute>
+                            }
+                            />
+                            <Route path="/update-profile" element={
+                                <PrivateRoute>
+                                    <UpdateProfile />
+                                </PrivateRoute>
+                            }
+                            />
+                            <Route path="/login" element={
+                                <PublicOnlyRoute>
+                                    <Login />
+                                </PublicOnlyRoute>
+                            }
+                            />
+                            <Route path="/signup" element={
+                                <PublicOnlyRoute>
+                                    <Signup />
+                                </PublicOnlyRoute>
+                            }
+                            />
+                            {/*Company Route*/}
+                            <Route path="/company" element={
+                                <PrivateRoute>
+                                    <CompanyAbout />
+                                </PrivateRoute>
+                            } />
+                            <Route path="/company/list" element={
+                                <PrivateRoute>
+                                    <CompanyList />
+                                </PrivateRoute>
+                            }/>
+                            <Route path="/company/new" element={
+                                <PrivateRoute>
+                                    <CompanyNew />
+                                </PrivateRoute>
+                            } />
+                            <Route path="/company/:id" element={
+                                <PrivateRoute>
+                                    <CompanyDetail />
+                                </PrivateRoute>
+                            } />
+                            <Route path="/company/:id/edit" element={
+                                <PrivateRoute>
+                                    <EditProfile />
+                                </PrivateRoute>
+                            } />
+
+
+                        </Route>
+                    </Routes>
+
                 </Typography>
             </Box>
         </Box>
