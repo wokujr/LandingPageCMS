@@ -7,10 +7,16 @@ namespace :api do
       patch '/', to: 'registrations#update_profile', as: :user_update_profile
     end
     resources :books
-
+    resources :companies do
+      member do
+        post 'upload_image'
+        post 'upload_video'
+      end
+    end
     namespace :android do
       resources :books
     end
+    get 'latest', to: 'companies#latest', as: 'latest_companies'
     get '/users/me', to: 'users#me'
   end
 end
