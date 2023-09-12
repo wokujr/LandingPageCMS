@@ -1,7 +1,7 @@
-import React, { useState} from 'react';
+import React, {useRef, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// import DOMPurify from 'dompurify';
+const API_URL = 'http://localhost:3000/api/v1'
 
 export default function CompanyNew() {
     const navigate = useNavigate();
@@ -9,7 +9,8 @@ export default function CompanyNew() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [image, setImage] = useState(null);
-    const [video, setVideo] = useState(null);
+    const [video, setVideo] = useState(null)
+    const formRef = useRef();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +25,7 @@ export default function CompanyNew() {
             form.append('company[video]', video);
         }
 
-        await fetch('http://localhost:3000/api/v1/companies', {
+        await fetch(`${API_URL}/companies`, {
             method: 'POST',
             body: form,
         });
@@ -37,16 +38,25 @@ export default function CompanyNew() {
     const handleImageChange = (event) => {
         setImage(URL.createObjectURL(event.target.files[0]));
     };
+    const handleDeleteImage = () => {
+        // Reset the input field value
+        setImage(null);
+        formRef.current.reset();
+    };
+    const handleDeleteVideo = () => {
+        // Reset the input field value
+        setVideo(null);
+        formRef.current.reset();
+    };
 
     const handleVideoChange = (event) => {
-        const selectedVideo = event.target.files[0];
-        setVideo(selectedVideo);
+        setVideo(URL.createObjectURL(event.target.files[0]));
     };
 
 
     return(
         <div className="container mt-5 ">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} ref={formRef}>
                 <div className="mt-4">
                     <label htmlFor="titleInput">Title:</label>
                     <input
@@ -72,21 +82,28 @@ export default function CompanyNew() {
                     />
                 </div>
 
-                <div>
-                    <label htmlFor="titleInput">Image:</label>
+                <div className="bordered">
+                    <label htmlFor="titleInput">Image</label>
                     <input
                         className="mb-2"
                         type="file"
                         name="image"
                         id="image"
-                        accept="image/jpeg/ image/jpg image/png" // Add this to restrict to image files
+                        accept="image/jpeg, image/jpg, image/png" // Add this to restrict to image files
                         onChange={handleImageChange}
                     />
-                    <img className="w-25" src={image} alt={title}/>
+                    {image && (
+                        <div>
+                            <div>
+                                <img className="w-25 h-25" src={image} alt={title}/>
+                            </div>
+                            <button className="btn btn-danger mt-2" onClick={handleDeleteImage}>
+                                Delete Image
+                            </button>
+
+                        </div>
+                        )}
                 </div>
-
-
-                <br />
                 <div>
                     <label htmlFor="titleInput">Video:</label>
                     <input
@@ -94,9 +111,18 @@ export default function CompanyNew() {
                         type="file"
                         name="video"
                         id="video"
-                        accept="video/mp4" // Add this to restrict to image files
+                        accept="video/mp4, video/mkv" // Add this to restrict to image files
                         onChange={handleVideoChange}
                     />
+                    {video && (
+                        <div>
+                            <div>
+                                <video width={200} height={200} src={video} />
+                            </div>
+                            <button className="btn btn-danger" onClick={handleDeleteVideo}> Delete </button>
+                        </div>
+                    )}
+
                 </div>
 
                 <br />
