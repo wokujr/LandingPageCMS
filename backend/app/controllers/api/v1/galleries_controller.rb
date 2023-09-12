@@ -1,4 +1,4 @@
-class GalleriesController < ApplicationController
+class Api::V1::GalleriesController < ApplicationController
   before_action :set_gallery, only: %i[ show update destroy ]
   skip_before_action :verify_authenticity_token, raise: false
 
