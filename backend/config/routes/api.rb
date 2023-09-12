@@ -7,6 +7,8 @@ namespace :api do
       patch '/', to: 'registrations#update_profile', as: :user_update_profile
     end
     resources :books
+    resources :teams
+    resources :galleries
     resources :companies do
       member do
         post 'upload_image'

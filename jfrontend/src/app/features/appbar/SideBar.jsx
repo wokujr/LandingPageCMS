@@ -20,15 +20,22 @@ import PrivateRoute from "../routes/PrivateRoute";
 import Logout from "../sessions/Logout";
 import UpdateProfile from "../sessions/UpdateProfile";
 import PublicOnlyRoute from "../routes/PublicOnlyRoute";
+
 import Login from "../sessions/Login";
 import Signup from "../sessions/Signup";
+
 import CompanyAbout from "../company/CompanyAbout";
 import CompanyList from "../company/CompanyList";
 import CompanyNew from "../company/CompanyNew";
 import CompanyDetail from "../company/CompanyDetail";
 import EditProfile from "../company/EditProfile";
 
+import NewTeams from "../company/teams/NewTeam";
+import TeamList from "../company/teams/TeamList";
+
 const drawerWidth = 240;
+
+// BIG MESS HERE ! OwO
 
 function ResponsiveDrawer(props) {
     const { window } = props;
@@ -88,6 +95,16 @@ function ResponsiveDrawer(props) {
         navigate("/company/list")
     }
 
+    // Team Functions
+    function handleNewTeam(e){
+        e?.preventDefault();
+        navigate("/team/new");
+    }
+    function handleTeamList(e){
+        e?.preventDefault();
+        navigate("/teams")
+    }
+
     const drawer = (
         <div>
             <Toolbar />
@@ -103,8 +120,8 @@ function ResponsiveDrawer(props) {
                 <MenuItem onClick={handleListProfile}>List Profile</MenuItem>
 
                 <Divider style={{ background: 'black' }}/>
-                <MenuItem >Team List</MenuItem>
-                <MenuItem >New Team</MenuItem>
+                <MenuItem onClick={ handleTeamList } >Team List</MenuItem>
+                <MenuItem onClick={ handleNewTeam } >New Team</MenuItem>
 
                 <Divider style={{ background: 'black' }}/>
                 <MenuItem >Galery</MenuItem>
@@ -208,6 +225,7 @@ function ResponsiveDrawer(props) {
                                 </PublicOnlyRoute>
                             }
                             />
+
                             {/*Company Route*/}
                             <Route path="/company" element={
                                 <PrivateRoute>
@@ -235,6 +253,17 @@ function ResponsiveDrawer(props) {
                                 </PrivateRoute>
                             } />
 
+                            {/*Teams*/}
+                            <Route path="/teams" element={
+                                <PrivateRoute>
+                                    <TeamList />
+                                </PrivateRoute>
+                            } />
+                            <Route path="/team/new" element={
+                                <PrivateRoute>
+                                    <NewTeams />
+                                </PrivateRoute>
+                            } />
 
                         </Route>
                     </Routes>
