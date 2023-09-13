@@ -53,7 +53,6 @@ export default function CompanyNew() {
         setVideo(URL.createObjectURL(event.target.files[0]));
     };
 
-
     return(
         <div className="container mt-5 ">
             <form onSubmit={handleSubmit} ref={formRef}>

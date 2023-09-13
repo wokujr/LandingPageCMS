@@ -58,7 +58,7 @@ export default function TeamList() {
                     <tr>
                         <td>{team.name}</td>
                         <td>{team.position}</td>
-                        <td><img width={50} height={50} src={team.image_url} alt={team.name}/></td>
+                        <td><img className="rounded-circle" width={50} height={50} src={team.image_url} alt={team.name}/></td>
                         <td>
                             <div>
                                 <button onClick={() => {

@@ -33,6 +33,10 @@ import EditProfile from "../company/EditProfile";
 import NewTeams from "../company/teams/NewTeam";
 import TeamList from "../company/teams/TeamList";
 
+import Gallery from "../company/galleries/Gallery"
+import NewImage from "../company/galleries/NewImage";
+import ShowGallery from"../company/galleries/ShowGallery";
+
 const drawerWidth = 240;
 
 // BIG MESS HERE ! OwO
@@ -105,6 +109,15 @@ function ResponsiveDrawer(props) {
         navigate("/teams")
     }
 
+    function handleGallery(e){
+        e?.preventDefault();
+        navigate("/galleries");
+    }
+    function handleNewGallery(e){
+        e?.preventDefault();
+        navigate("/gallery/new");
+    }
+
     const drawer = (
         <div>
             <Toolbar />
@@ -124,7 +137,9 @@ function ResponsiveDrawer(props) {
                 <MenuItem onClick={ handleNewTeam } >New Team</MenuItem>
 
                 <Divider style={{ background: 'black' }}/>
-                <MenuItem >Galery</MenuItem>
+                <MenuItem onClick={handleGallery}>Galery</MenuItem>
+                <MenuItem onClick={handleNewGallery}>Add New Images</MenuItem>
+
                 <MenuItem >Contact</MenuItem>
 
                 <Divider style={{ background: 'black' }}/>
@@ -262,6 +277,23 @@ function ResponsiveDrawer(props) {
                             <Route path="/team/new" element={
                                 <PrivateRoute>
                                     <NewTeams />
+                                </PrivateRoute>
+                            } />
+
+                            {/*Gallery*/}
+                            <Route path="/galleries" element={
+                                <PrivateRoute>
+                                    <Gallery />
+                                </PrivateRoute>
+                            } />
+                            <Route path="/gallery/new" element={
+                                <PrivateRoute>
+                                    <NewImage />
+                                </PrivateRoute>
+                            } />
+                            <Route path="/gallery/:id" element={
+                                <PrivateRoute>
+                                    <ShowGallery />
                                 </PrivateRoute>
                             } />
 
