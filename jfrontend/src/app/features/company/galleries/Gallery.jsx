@@ -43,11 +43,9 @@ function Gallery() {
             console.log("Well, that's embarrassing delete", error);
         }
     }
-
     function handleShowDetail (id) {
         navigate(`/gallery/${id}`)
     }
-
     return (
         <div>
             <h1>Galleries</h1>

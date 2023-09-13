@@ -14,6 +14,7 @@ import Dashboard from "../dashboard/Dashboard";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+
 import {Route, Routes, useNavigate} from "react-router-dom";
 import PersistLogin from "../sessions/PersistLogin";
 import PrivateRoute from "../routes/PrivateRoute";
@@ -150,7 +151,7 @@ function ResponsiveDrawer(props) {
             <Divider />
 
             {/*User*/}
-            <Button id="user" aria-controls={openUser ? 'user' : undefined} aria-haspopup="true" aria-expanded={openUser ? 'true' : undefined} onClick={handleClickUser}>
+            <Button placement="bottom" id="user" aria-controls={openUser ? 'user' : undefined} aria-haspopup="true" aria-expanded={openUser ? 'true' : undefined} onClick={handleClickUser}>
                 User
             </Button>
             <Menu id="user" anchorEl={anchorElUser} open={openUser} onClose={handleCloseUser} MenuListProps={{'aria-labelledby': 'user',}}>
