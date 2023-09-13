@@ -7,12 +7,14 @@ class Api::V1::CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.order(created_at: :desc)
+    render json: @companies
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
     set_company
+    render json: company_json(@company)
   end
 
   def edit

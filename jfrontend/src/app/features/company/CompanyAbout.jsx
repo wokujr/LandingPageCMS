@@ -52,10 +52,10 @@ export default function CompanyAbout (  ) {
                     <img
                         src={about.image_url}
                         alt="latest post"
-                        className="latest-image mb-4 w-50"
+                        className="latest-image mb-4 w-50 mx-auto"
                     />
 
-                    <div>
+                    <div className="mx-auto">
                         <h1>Video Player</h1>
                         <VideoPlayer width="320" height="240" videoUrl={about.video_url} />
                     </div>

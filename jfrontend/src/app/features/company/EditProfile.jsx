@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ReactPlayer from 'react-player';
 import axios from "axios";
 import PropTypes from "prop-types";
@@ -14,6 +14,7 @@ export default function EditProfile(){
 
     const [newImage, setNewImage] = useState(null);
     const [newVideo, setNewVideo] = useState(null);
+    const navigate =useNavigate();
 
 
     useEffect( ()=> {
@@ -123,6 +124,7 @@ export default function EditProfile(){
         } catch (error) {
             console.log("An error occurred", error);
         }
+        navigate("/company/list")
     };
 
     if (!edit) return <h2>Loading...</h2>

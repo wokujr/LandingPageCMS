@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {useNavigate} from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const API_URL = 'http://localhost:3000/api/v1';
 
@@ -46,9 +45,15 @@ function Gallery() {
     function handleShowDetail (id) {
         navigate(`/gallery/${id}`)
     }
+
+    function handleAddGallery() {
+        navigate('/gallery/new');
+    }
+
     return (
         <div>
             <h1>Galleries</h1>
+
             {images.length > 0 ? (
                 <div className="row">
                     {images.map((image) => (
@@ -57,10 +62,11 @@ function Gallery() {
                                 <img src={image.image_urls[0]} className="card-img-top" alt={image.image_name} />
                                 <div className="card-body">
                                     <h5 className="card-title">{image.image_name}</h5>
-                                    <button onClick={() => handleShowDetail(image.id)} className="btn mx-1">
-                                        <VisibilityIcon/>
+                                    <button onClick={() => handleShowDetail(image.id)} className="btn btn-primary mx-1">
+                                        Show
                                     </button>
-                                    <button onClick={() => handleDelete(image.id)} className="btn mx-1">
+                                    <button onClick={handleAddGallery} className="btn rounded btn-warning mx-1"> Add </button>
+                                    <button onClick={() => handleDelete(image.id)} className="btn btn-outline-danger mx-1">
                                         <DeleteIcon />
                                     </button>
                                 </div>

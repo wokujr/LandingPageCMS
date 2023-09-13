@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 const API_URL = "http://localhost:3000/api/v1"
 
-function NewImage() {
+function NewGallery() {
     const [image_name, setImage_name] = useState('');
     const imagesRef = useRef([]);
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ function NewImage() {
             method: "POST",
             body:formData,
         })
-        navigate("/gallery/new")
+        navigate("/galleries")
     }
 
 
@@ -49,4 +49,4 @@ function NewImage() {
   );
 }
 
-export default NewImage;
+export default NewGallery;
