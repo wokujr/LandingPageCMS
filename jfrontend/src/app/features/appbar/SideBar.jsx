@@ -16,32 +16,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import { useNavigate} from "react-router-dom";
-// Route, Routes,
-// import PersistLogin from "../sessions/PersistLogin";
-// import PrivateRoute from "../routes/PrivateRoute";
-// import Logout from "../sessions/Logout";
-// import UpdateProfile from "../sessions/UpdateProfile";
-// import PublicOnlyRoute from "../routes/PublicOnlyRoute";
-// import Dashboard from "../dashboard/Dashboard";
-// import Login from "../sessions/Login";
-// import Signup from "../sessions/Signup";
-//
-// import CompanyAbout from "../company/CompanyAbout";
-// import CompanyList from "../company/CompanyList";
-// import CompanyNew from "../company/CompanyNew";
-// import CompanyDetail from "../company/CompanyDetail";
-// import EditProfile from "../company/EditProfile";
-//
-// import NewTeams from "../company/teams/NewTeam";
-// import TeamList from "../company/teams/TeamList";
-//
-// import Gallery from "../company/galleries/Gallery"
-// import NewImage from "../company/galleries/NewImage";
-// import ShowGallery from"../company/galleries/ShowGallery";
-
 const drawerWidth = 240;
-
-// BIG MESS HERE ! OwO
 
 function ResponsiveDrawer(props) {
     const { window } = props;
@@ -207,104 +182,6 @@ function ResponsiveDrawer(props) {
                         {drawer}
                     </Drawer>
                 </Box>
-                {/*<Box component="main" sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}>*/}
-                {/*    <Toolbar/>*/}
-                {/*    <Typography paragraph>*/}
-
-                {/*        <Routes>*/}
-                {/*            <Route element={<PersistLogin/>}>*/}
-                {/*                <Route path="/" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <Dashboard/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }*/}
-                {/*                />*/}
-                {/*                <Route path="/logout" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <Logout/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }*/}
-                {/*                />*/}
-                {/*                <Route path="/update-profile" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <UpdateProfile/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }*/}
-                {/*                />*/}
-                {/*                <Route path="/login" element={*/}
-                {/*                    <PublicOnlyRoute>*/}
-                {/*                        <Login/>*/}
-                {/*                    </PublicOnlyRoute>*/}
-                {/*                }*/}
-                {/*                />*/}
-                {/*                <Route path="/signup" element={*/}
-                {/*                    <PublicOnlyRoute>*/}
-                {/*                        <Signup/>*/}
-                {/*                    </PublicOnlyRoute>*/}
-                {/*                }*/}
-                {/*                />*/}
-
-                {/*                /!*Company Route*!/*/}
-                {/*                <Route path="/company" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <CompanyAbout/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-                {/*                <Route path="/company/list" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <CompanyList/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-                {/*                <Route path="/company/new" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <CompanyNew/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-                {/*                <Route path="/company/:id" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <CompanyDetail/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-                {/*                <Route path="/company/:id/edit" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <EditProfile/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-
-                {/*                /!*Teams*!/*/}
-                {/*                <Route path="/teams" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <TeamList/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-                {/*                <Route path="/team/new" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <NewTeams/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-
-                {/*                /!*Gallery*!/*/}
-                {/*                <Route path="/galleries" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <Gallery/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-                {/*                <Route path="/gallery/new" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <NewImage/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-                {/*                <Route path="/gallery/:id" element={*/}
-                {/*                    <PrivateRoute>*/}
-                {/*                        <ShowGallery/>*/}
-                {/*                    </PrivateRoute>*/}
-                {/*                }/>*/}
-
-                {/*            </Route>*/}
-                {/*        </Routes>*/}
-
-                {/*    </Typography>*/}
-                {/*</Box>*/}
             </Box>
     );
 }

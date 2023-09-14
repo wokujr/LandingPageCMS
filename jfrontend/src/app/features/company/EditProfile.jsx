@@ -50,7 +50,8 @@ export default function EditProfile(){
     };
 
     // Update Video And image
-    const updateImage = async () => {
+    const updateImage = async (e) => {
+        e.preventDefault()
         if (!newImage) return;
 
         const formData = new FormData();

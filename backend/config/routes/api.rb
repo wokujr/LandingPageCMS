@@ -8,15 +8,19 @@ namespace :api do
     end
     resources :books
     resources :teams
-    resources :galleries
+    resources :contacts
+    resources :galleries do
+      member do
+        post :upload_new_image
+        delete :remove_image
+        delete :delete_single_image
+      end
+    end
     resources :companies do
       member do
         post 'upload_image'
         post 'upload_video'
       end
-    end
-    namespace :android do
-      resources :books
     end
     get 'latest', to: 'companies#latest', as: 'latest_companies'
     get '/users/me', to: 'users#me'

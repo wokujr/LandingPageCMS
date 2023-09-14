@@ -20,11 +20,13 @@ import NewTeams from "./app/features/company/teams/NewTeam";
 import Gallery from "./app/features/company/galleries/Gallery";
 import NewGallery from "./app/features/company/galleries/NewGallery";
 import ShowGallery from "./app/features/company/galleries/ShowGallery";
+import NewImage from "./app/features/company/galleries/NewImage";
 
 import SideBar from "./app/features/appbar/SideBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Contact from "./app/features/company/contact/Contact";
 
 const drawerWidth = 240;
 
@@ -34,106 +36,117 @@ function App() {
             <Router>
                 <div className="row">
                     <div className="col-2">
-                        <Box component="nav" sx={{display: 'flex', width: {sm: drawerWidth}, flexShrink: {sm: 0}}} aria-label="mailbox folders">
+                        <Box component="nav" sx={{display: 'flex', width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
+                             aria-label="mailbox folders">
                             <SideBar/>
                         </Box>
                     </div>
                     <div className="col">
                         <Box component="main" sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}>
                             <Toolbar/>
-                            <Typography paragraph>
-                                <Routes>
-                                    <Route element={<PersistLogin/>}>
-                                        <Route path="/" element={
-                                            <PrivateRoute>
-                                                <Dashboard/>
-                                            </PrivateRoute>
-                                        }
-                                        />
-                                        <Route path="/logout" element={
-                                            <PrivateRoute>
-                                                <Logout/>
-                                            </PrivateRoute>
-                                        }
-                                        />
-                                        <Route path="/update-profile" element={
-                                            <PrivateRoute>
-                                                <UpdateProfile/>
-                                            </PrivateRoute>
-                                        }
-                                        />
-                                        <Route path="/login" element={
-                                            <PublicOnlyRoute>
-                                                <Login/>
-                                            </PublicOnlyRoute>
-                                        }
-                                        />
-                                        <Route path="/signup" element={
-                                            <PublicOnlyRoute>
-                                                <Signup/>
-                                            </PublicOnlyRoute>
-                                        }
-                                        />
+                            <Routes>
+                                <Route element={<PersistLogin/>}>
+                                    <Route path="/" element={
+                                        <PrivateRoute>
+                                            <Dashboard/>
+                                        </PrivateRoute>
+                                    }
+                                    />
+                                    <Route path="/logout" element={
+                                        <PrivateRoute>
+                                            <Logout/>
+                                        </PrivateRoute>
+                                    }
+                                    />
+                                    <Route path="/update-profile" element={
+                                        <PrivateRoute>
+                                            <UpdateProfile/>
+                                        </PrivateRoute>
+                                    }
+                                    />
+                                    <Route path="/login" element={
+                                        <PublicOnlyRoute>
+                                            <Login/>
+                                        </PublicOnlyRoute>
+                                    }
+                                    />
+                                    <Route path="/signup" element={
+                                        <PublicOnlyRoute>
+                                            <Signup/>
+                                        </PublicOnlyRoute>
+                                    }
+                                    />
 
-                                        {/*Company Route*/}
-                                        <Route path="/company" element={
-                                            <PrivateRoute>
-                                                <CompanyAbout/>
-                                            </PrivateRoute>
-                                        }/>
-                                        <Route path="/company/list" element={
-                                            <PrivateRoute>
-                                                <CompanyList/>
-                                            </PrivateRoute>
-                                        }/>
-                                        <Route path="/company/new" element={
-                                            <PrivateRoute>
-                                                <CompanyNew/>
-                                            </PrivateRoute>
-                                        }/>
-                                        <Route path="/company/:id" element={
-                                            <PrivateRoute>
-                                                <CompanyDetail/>
-                                            </PrivateRoute>
-                                        }/>
-                                        <Route path="/company/:id/edit" element={
-                                            <PrivateRoute>
-                                                <EditProfile/>
-                                            </PrivateRoute>
-                                        }/>
+                                    {/*Company Route*/}
+                                    <Route path="/company" element={
+                                        <PrivateRoute>
+                                            <CompanyAbout/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route path="/company/list" element={
+                                        <PrivateRoute>
+                                            <CompanyList/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route path="/company/new" element={
+                                        <PrivateRoute>
+                                            <CompanyNew/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route path="/company/:id" element={
+                                        <PrivateRoute>
+                                            <CompanyDetail/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route path="/company/:id/edit" element={
+                                        <PrivateRoute>
+                                            <EditProfile/>
+                                        </PrivateRoute>
+                                    }/>
 
-                                        {/*Teams*/}
-                                        <Route path="/teams" element={
-                                            <PrivateRoute>
-                                                <TeamList/>
-                                            </PrivateRoute>
-                                        }/>
-                                        <Route path="/team/new" element={
-                                            <PrivateRoute>
-                                                <NewTeams/>
-                                            </PrivateRoute>
-                                        }/>
+                                    {/*Teams*/}
+                                    <Route path="/teams" element={
+                                        <PrivateRoute>
+                                            <TeamList/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route path="/team/new" element={
+                                        <PrivateRoute>
+                                            <NewTeams/>
+                                        </PrivateRoute>
+                                    }/>
 
-                                        {/*Gallery*/}
-                                        <Route path="/galleries" element={
-                                            <PrivateRoute>
-                                                <Gallery/>
-                                            </PrivateRoute>
-                                        }/>
-                                        <Route path="/gallery/new" element={
-                                            <PrivateRoute>
-                                                <NewGallery/>
-                                            </PrivateRoute>
-                                        }/>
-                                        <Route path="/gallery/:id" element={
-                                            <PrivateRoute>
-                                                <ShowGallery/>
-                                            </PrivateRoute>
-                                        }/>
+                                    {/*Gallery*/}
+                                    <Route path="/galleries" element={
+                                        <PrivateRoute>
+                                            <Gallery/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route path="/gallery/new" element={
+                                        <PrivateRoute>
+                                            <NewGallery/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route path="/gallery/:id" element={
+                                        <PrivateRoute>
+                                            <ShowGallery/>
+                                        </PrivateRoute>
+                                    }/>
+                                    <Route path="/gallery/:id/edit" element={
+                                        <PrivateRoute>
+                                            <NewImage/>
+                                        </PrivateRoute>
+                                    }/>
 
-                                    </Route>
-                                </Routes>
-                            </Typography>
+                                    {/*CONTACT*/}
+                                    <Route path="/contact" element={
+                                        <PrivateRoute>
+                                            <Contact/>
+                                        </PrivateRoute>
+                                    }/>
+
+                                </Route>
+                            </Routes>
                         </Box>
                     </div>
                 </div>

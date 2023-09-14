@@ -9,3 +9,4 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 load(Rails.root.join('db', 'seeds', "#{Rails.env.downcase}.rb"))
+Contact.create(telephone: "080 0000", email: "email@email.com")
