@@ -64,19 +64,22 @@ function Gallery() {
                     <div className="col-md-12">
                         <div className="mb-3 d-flex flex-wrap">
                             {images.map((image) => (
-                                <div key={image.id} className="card mx-2" style={{ width: "18rem" }}>
-                                    <img src={image.image_data[0].image_urls} className="card-img-top" alt={image.image_name} />
+                                <div key={image.id} className="card mx-2" style={{width: "18rem"}}>
+                                    <img src={image.image_data[0].image_urls} className="card-img-top" alt={image.image_name}/>
                                     <div className="card-body">
                                         <h5 className="card-title">{image.image_name}</h5>
                                         <div className="d-flex justify-content-between">
-                                            <button onClick={() => handleShowDetail(image.id)} className="btn btn-primary mx-1">
+                                            <button onClick={() => handleShowDetail(image.id)}
+                                                    className="btn btn-primary mx-1">
                                                 Show
                                             </button>
-                                            <button onClick={() => handleEditImage(image.id)} className="btn rounded btn-warning mx-1">
+                                            <button onClick={() => handleEditImage(image.id)}
+                                                    className="btn rounded btn-warning mx-1">
                                                 Add
                                             </button>
-                                            <button onClick={() => handleDelete(image.id)} className="btn btn-outline-danger mx-1">
-                                                <DeleteIcon />
+                                            <button onClick={() => handleDelete(image.id)}
+                                                    className="btn btn-outline-danger mx-1">
+                                                <DeleteIcon/>
                                             </button>
                                         </div>
                                     </div>

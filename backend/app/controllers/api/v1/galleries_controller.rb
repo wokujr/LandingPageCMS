@@ -15,11 +15,9 @@ class Api::V1::GalleriesController < ApplicationController
     @gallery = Gallery.new(gallery_params.except(:images))
     @gallery.image_name = params[:gallery][:image_name]
     images = params[:gallery][:images]
-    if images
-      images.each do |image|
+    images&.each do |image|
         @gallery.images.attach(image)
       end
-    end
     if @gallery.save
       render :show, status: :created, location: @gallery
     else
@@ -29,11 +27,9 @@ class Api::V1::GalleriesController < ApplicationController
 
   def update
     images = params[:gallery][:images]
-    if images
-      images.each do |image|
+    images&.each do |image|
         @gallery.images.attach(image)
       end
-    end
     if @gallery.save
       render json: @gallery
     end
@@ -41,13 +37,11 @@ class Api::V1::GalleriesController < ApplicationController
 
   def destroy
     gallery = Gallery.find(params[:id])
-    image = gallery.image.find(params[:image_id])
-    image.purge
-    gallery.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    image_destroy = gallery.ActiveStorage::Attachment.find(params[:id])
+    image_destroy.purge_later
   end
+
+
 
   def upload_new_image
     gallery = Gallery.find(params[:id])
