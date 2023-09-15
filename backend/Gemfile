@@ -100,3 +100,5 @@ gem 'swagger-blocks'
 
 gem 'carrierwave', '~> 3.0'
 gem 'jsonapi-serializer'
+
+gem "doorkeeper-jwt", "~> 0.4.1"
